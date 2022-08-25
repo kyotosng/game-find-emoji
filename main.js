@@ -13,6 +13,9 @@ function draw() {
     game.draw()
 
 }
+function mousePressed() {
+    game.different.clicked()
+}
 
 const game = new Game()
 
