@@ -21,7 +21,7 @@ class Game {
         for (let i = 1; i <= 200; i++) {
             this.emojis.push(new Emoji())
          }
-        console.log(this.emojis)
+        
     }    
     preload () {
         frameRate(30)
@@ -33,11 +33,10 @@ class Game {
         
     }
     draw() {  
-        clear() 
+        // clear() 
         
         this.emojis.forEach(function(emoji) {
             emoji.draw()  
-            console.log(emoji.x, emoji.y)
         })
 
         if (this.different.clickedEmoji === true) {
@@ -75,8 +74,7 @@ class Emoji {
         if (this.y > canvasHeight - this.width || this.y <= 0) {
             this.ySpeed *= -1;
         }
-       // console.log(`emoji x: ${this.x}`)
-       // console.log(`emoji y: ${this.y}`)
+      
         
         image(this.emojiImage, this.x, this.y, this.width, this.height) 
     }  
@@ -109,9 +107,9 @@ class Different {
         
         
     }
-    draw () { // eh um loop, colocar aqui so oq deve ser mostrado constantemente
+    draw() { // eh um loop, colocar aqui so oq deve ser mostrado constantemente
 
-
+        
         this.x += this.xSpeed;
         this.y += this.ySpeed;
 
@@ -122,12 +120,8 @@ class Different {
             this.ySpeed *= -1;
         }
 
-       // console.log(`diff x: ${this.x}`)
-       // console.log(`diff y: ${this.y}`)
-        image(this.differentImage, this.x, this.y, this.width, this.height) 
-
-
     
+        image(this.differentImage, this.x, this.y, this.width, this.height) 
     }
     clicked() {
         
