@@ -4,7 +4,7 @@ let canvasWidth = 1270
 
 class Game {
     constructor() {
-        
+        this.interval
         this.emojiImage
         this.emoji = new Emoji() 
         this.different = new Different()
@@ -104,6 +104,7 @@ class Different {
     preload() {
         this.youWin = loadImage('assets/win.png')
         this.differentImage = loadImage('assets/pikachu2.png') 
+
         
         
     }
@@ -128,6 +129,7 @@ class Different {
         //loadImage('assets/win.png')
         if (dist(mouseX, mouseY, this.x, this.y) < this.width) {
            this.clickedEmoji = true;
+           clearInterval(game.interval)
           
            
         }
