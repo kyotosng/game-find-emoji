@@ -4,15 +4,23 @@ let canvasWidth = 1270
 
 class Game {
     constructor() {
-        this.differentImage
+        
         this.emojiImage
         this.emoji = new Emoji() 
         this.different = new Different()
         this.emojis = [];
+        this.differentImage
+        
 
-       for (let i = 1; i <= 10; i++) {
+       for (let i = 1; i <= 700; i++) {
            this.emojis.push(new Emoji())
         }
+
+        this.emojis.push(this.different)
+
+        for (let i = 1; i <= 200; i++) {
+            this.emojis.push(new Emoji())
+         }
         console.log(this.emojis)
     }    
     preload () {
@@ -24,12 +32,18 @@ class Game {
         })
         
     }
-    draw() {   
-        this.different.draw()
+    draw() {  
+        clear() 
+        
         this.emojis.forEach(function(emoji) {
             emoji.draw()  
             console.log(emoji.x, emoji.y)
         })
+
+        if (this.different.clickedEmoji === true) {
+            image(this.different.youWin, 0, 0, 1270, 605)    
+        }
+        
     }    
     
        
@@ -39,26 +53,26 @@ class Emoji {
     constructor() {
         this.x = Math.floor(Math.random() * 1230);
         this.y = Math.floor(Math.random() * 565);
-        this.width = 60
-        this.height = 60
-        this.xSpeed = 2.8
-        this.ySpeed = 2.8
+        this.width = 80
+        this.height = 80
+        this.xSpeed = Math.floor(Math.random() * 4) * (Math.random() < 0.5 ? -1 : 1)
+        this.ySpeed = Math.floor(Math.random() * 4) * (Math.random() < 0.5 ? -1 : 1)
         this.emojiImage
-        this.rad = 60;
+        
     }
     preload() {
-        this.emojiImage = loadImage('assets/standard.png')
+        this.emojiImage = loadImage('assets/thinking.png')
     
     }     
     draw() {
-        clear()
+       
         this.x += this.xSpeed;
         this.y += this.ySpeed;
         
-        if (this.x > canvasWidth - this.rad || this.x <= 0) {
+        if (this.x > canvasWidth - this.width || this.x <= 0) {
             this.xSpeed *= -1;
         }
-        if (this.y > canvasHeight - this.rad || this.y <= 0) {
+        if (this.y > canvasHeight - this.width || this.y <= 0) {
             this.ySpeed *= -1;
         }
        // console.log(`emoji x: ${this.x}`)
@@ -80,30 +94,31 @@ class Different {
     constructor() {
         this.x = Math.floor(Math.random() * 1230);
         this.y = Math.floor(Math.random() * 565);
-        this.width = 60
-        this.height = 60
+        this.width = 115
+        this.height = 115
         this.xSpeed = 2.8
         this.ySpeed = 2.8
         this.differentImage
-        this.rad = 60
         this.youWin
         this.clickedEmoji = false
 
     }  
     preload() {
-        this.differentImage = loadImage('assets/different.png') 
         this.youWin = loadImage('assets/win.png')
+        this.differentImage = loadImage('assets/pikachu2.png') 
+        
         
     }
     draw () { // eh um loop, colocar aqui so oq deve ser mostrado constantemente
-        clear()
+
+
         this.x += this.xSpeed;
         this.y += this.ySpeed;
 
-        if (this.x > canvasWidth - this.rad || this.x <= 0) {
+        if (this.x > canvasWidth - this.width || this.x <= 0) {
             this.xSpeed *= -1;
         }
-        if (this.y > canvasHeight - this.rad || this.y <= 0) {
+        if (this.y > canvasHeight - this.width || this.y <= 0) {
             this.ySpeed *= -1;
         }
 
@@ -111,9 +126,6 @@ class Different {
        // console.log(`diff y: ${this.y}`)
         image(this.differentImage, this.x, this.y, this.width, this.height) 
 
-        if (this.clickedEmoji === true) {
-            image(this.youWin, 0, 0, 1270, 605)    
-        }
 
     
     }
